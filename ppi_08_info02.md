@@ -80,6 +80,6 @@ LIBRERÍAS DISPONIBLES
 
 [Matplotlib](https://matplotlib.org/) o [Seaborn](https://seaborn.pydata.org/): Son dos librerías de visualización de datos que se utilizan para crear gráficos y visualizaciones. Ambas librerías son útiles para mostrar los resultados de la aplicación de una manera visualmente atractiva.
 
-[Scikit-learn]([url](https://scikit-learn.org/stable/)): Es una librería de aprendizaje automático de Python que se utiliza para implementar algoritmos de aprendizaje automático en la aplicación. Si se desea implementar un sistema de recomendación de profesores basado en las calificaciones de los estudiantes, esta librería puede ser útil.
+[Scikit-learn](https://scikit-learn.org/stable/): Es una librería de aprendizaje automático de Python que se utiliza para implementar algoritmos de aprendizaje automático en la aplicación. Si se desea implementar un sistema de recomendación de profesores basado en las calificaciones de los estudiantes, esta librería puede ser útil.
 
-[PyMongo]([url](https://pymongo.readthedocs.io/en/stable/)): Si se decide utilizar una base de datos NoSQL como MongoDB, PyMongo es una librería de Python que permite conectarte a la base de datos y realizar operaciones CRUD (crear, leer, actualizar, eliminar) en ella.
+[PyMongo](https://pymongo.readthedocs.io/en/stable/): Si se decide utilizar una base de datos NoSQL como MongoDB, PyMongo es una librería de Python que permite conectarte a la base de datos y realizar operaciones CRUD (crear, leer, actualizar, eliminar) en ella.

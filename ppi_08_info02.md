@@ -63,11 +63,11 @@ PostgreSQL o [MySQL]([url](https://www.mysql.com/)): Son sistemas de gestión de
 
 [Bootstrap]([url](https://getbootstrap.com/)): Es una librería de código abierto de HTML, CSS y JavaScript para el diseño web responsivo. Puede ser utilizado para crear un diseño y estilo uniforme para la aplicación.
 
-[React]([url](https://es.reactjs.org/)) o Vue.js: Son frameworks de JavaScript de código abierto que pueden ser utilizados para crear interfaces de usuario interactivas en tu aplicación.
+[React](https://es.reactjs.org/) o Vue.js: Son frameworks de JavaScript de código abierto que pueden ser utilizados para crear interfaces de usuario interactivas en tu aplicación.
 
-[Git]([url](https://git-scm.com/)): Es un sistema de control de versiones de código abierto que permite mantener un registro de los cambios en el código y colaborar con otros desarrolladores.
+[Git](https://git-scm.com/): Es un sistema de control de versiones de código abierto que permite mantener un registro de los cambios en el código y colaborar con otros desarrolladores.
 
-[Apache Lucene:]([url](https://lucene.apache.org/)) Es una librería de búsqueda de texto completo de código abierto. Puede ser utilizado para implementar un sistema de búsqueda de profesores y comentarios en la aplicación.
+[Apache Lucene](https://lucene.apache.org/): Es una librería de búsqueda de texto completo de código abierto. Puede ser utilizado para implementar un sistema de búsqueda de profesores y comentarios en la aplicación.
 
 
 

@@ -63,7 +63,7 @@ SOFTWARE OPEN SOURCE
 
 [Bootstrap](https://getbootstrap.com/): Es una librería de código abierto de HTML, CSS y JavaScript para el diseño web responsivo. Puede ser utilizado para crear un diseño y estilo uniforme para la aplicación.
 
-[React](https://es.reactjs.org/) o Vue.js: Son frameworks de JavaScript de código abierto que pueden ser utilizados para crear interfaces de usuario interactivas en tu aplicación.
+[React](https://es.reactjs.org/) o [Vue.js](https://vuejs.org/): Son frameworks de JavaScript de código abierto que pueden ser utilizados para crear interfaces de usuario interactivas en tu aplicación.
 
 [Git](https://git-scm.com/): Es un sistema de control de versiones de código abierto que permite mantener un registro de los cambios en el código y colaborar con otros desarrolladores.
 

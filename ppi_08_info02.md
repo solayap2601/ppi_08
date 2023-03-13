@@ -76,8 +76,6 @@ PostgreSQL o [MySQL]([url](https://www.mysql.com/)): Son sistemas de gestión de
 
 LIBRERÍAS DISPONIBLES
 
-Flask o Django: Son dos frameworks populares de Python para desarrollo web. Ambos proporcionan herramientas para manejar solicitudes HTTP, crear plantillas HTML, y conectarse a una base de datos. Flask es más liviano y fácil de usar, mientras que Django tiene más características integradas.
-
 [NumPy]([url](https://numpy.org/doc/stable/)) y [Pandas]([url](https://pandas.pydata.org/)): Es una librería de Python que se utiliza para trabajar con arreglos de datos multidimensionales, mientras que Pandas se utiliza para la manipulación y análisis de datos. Ambas librerías son útiles para el análisis de datos y el procesamiento de datos en la aplicación.
 
 [Matplotlib]([url](https://matplotlib.org/)) o [Seaborn]([url](https://seaborn.pydata.org/)): Son dos librerías de visualización de datos que se utilizan para crear gráficos y visualizaciones. Ambas librerías son útiles para mostrar los resultados de la aplicación de una manera visualmente atractiva.

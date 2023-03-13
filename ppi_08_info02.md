@@ -3,11 +3,11 @@ Informe 02
 
 Estudiantes:
           
-          Sebastián Olaya Pérez			C.C. 1001004684
+          Sebastián Olaya Pérez			
           
-          Juan Alejandro Espinosa Caceres                  C.C. 1001011355
+          Juan Alejandro Espinosa Caceres                  
           
-          Alejandro Aguirre Cardona                              C.C 1023625159
+          Alejandro Aguirre Cardona                              
 
 
 

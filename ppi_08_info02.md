@@ -76,7 +76,7 @@ PostgreSQL o [MySQL]([url](https://www.mysql.com/)): Son sistemas de gestión de
 
 LIBRERÍAS DISPONIBLES
 
-[NumPy]([url](https://numpy.org/doc/stable/)) y [Pandas]([url](https://pandas.pydata.org/)): Es una librería de Python que se utiliza para trabajar con arreglos de datos multidimensionales, mientras que Pandas se utiliza para la manipulación y análisis de datos. Ambas librerías son útiles para el análisis de datos y el procesamiento de datos en la aplicación.
+[NumPy](https://numpy.org/doc/stable/) y [Pandas]([url](https://pandas.pydata.org/)): Es una librería de Python que se utiliza para trabajar con arreglos de datos multidimensionales, mientras que Pandas se utiliza para la manipulación y análisis de datos. Ambas librerías son útiles para el análisis de datos y el procesamiento de datos en la aplicación.
 
 [Matplotlib]([url](https://matplotlib.org/)) o [Seaborn]([url](https://seaborn.pydata.org/)): Son dos librerías de visualización de datos que se utilizan para crear gráficos y visualizaciones. Ambas librerías son útiles para mostrar los resultados de la aplicación de una manera visualmente atractiva.
 

@@ -7,9 +7,10 @@ Acá se verá una breve vista de los aspectos a desarrollar de la aplicación en
 
 - Planificación y diseño de la base de datos y la arquitectura de la aplicación.
 
-- Creación de la interfaz de usuario básica y la funcionalidad para calificar y dejar comentarios sobre los profesores.
 
 ## Informe 04
+
+- Creación de la interfaz de usuario básica y la funcionalidad para calificar y dejar comentarios sobre los profesores.
 
 - Implementación de la funcionalidad para calcular el promedio de calificaciones de los profesores y mostrarlo en la plataforma.
 

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ carrera.nombre }}</title>
+  </head>
+  <body>
+    <h1>{{ carrera.nombre }}</h1>
+    <p>{{ carrera.descripcion }}</p>
+    <h2>Asignaturas</h2>
+    <ul>
+      {% for asignatura in asignaturas %}
+        <li>{{ asignatura.nombre }}</li>
+      {% empty %}
+        <li>No hay asignaturas disponibles para esta carrera.</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
+
+
+

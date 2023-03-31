@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ profesor.nombre }}</h1>
+  <h2>{{ curso.asignatura.nombre }}</h2>
+  {% if calificacion.avg_valor %}
+    <p>Calificación promedio: {{ calificacion.avg_valor|floatformat:2 }}/5</p>
+    <p>Número de calificaciones: {{ curso.calificacion_set.count }}</p>
+  {% else %}
+    <p>Aún no tiene calificaciones.</p>
+  {% endif %}
+  <hr>
+  <h3>Comentarios</h3>
+  {% for comentario in comentarios %}
+    <p>{{ comentario.fecha|date:"F d, Y" }} - {{ comentario.autor }} dijo:</p>
+    <p>{{ comentario.texto }}</p>
+    <hr>
+  {% empty %}
+    <p>No hay comentarios aún.</p>
+  {% endfor %}
+{% endblock %}

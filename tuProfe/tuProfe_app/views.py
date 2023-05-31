@@ -3,14 +3,40 @@ from .models import Docente, Materia, Calificacion, Comentario, Usuario
 import math
 from django.db.models import Q
 from django.http import HttpResponse
+from django.contrib.auth.hashers import make_password
+from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+import re
+from django.contrib import messages
 
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
 
 
+def register(request):
+    if request.method == 'POST':
+        nombre = request.POST['nombre']
+        correo = request.POST['correo']
+        contrasena = request.POST['contrasena']
+        if not correo.endswith('@unal.edu.co'):
+            messages.error(request, 'No estás usando un correo válido')
+        elif len(contrasena) < 8:
+            messages.error(request, 'La contraseña debe tener al menos 8 caracteres')
+        elif not re.search(r'[A-Z]', contrasena):
+            messages.error(request, 'La contraseña debe contener al menos una letra mayúscula')
+        elif not re.search(r'[a-z]', contrasena):
+            messages.error(request, 'La contraseña debe contener al menos una letra minúscula')
+        elif not re.search(r'\d', contrasena):
+            messages.error(request, 'La contraseña debe contener al menos un número')
+        elif not re.search(r'[!@#$%^&*()_+\-=\[\]{};\'\\:"|,.<>\/?]', contrasena):
+            messages.error(request, 'La contraseña debe contener al menos un carácter especial')
+        else:
+            usuario = Usuario(nombre=nombre, correo=correo, contrasena=contrasena)
+            usuario.save()
+            return redirect('home')
+    return render(request, 'register.html')
 
 
 def login(request):

@@ -3,6 +3,8 @@ Informe 02
 
 Estudiantes:
           
+	  Max Steven Hurtado
+	  
           Sebastián Olaya Pérez			
           
           Juan Alejandro Espinosa Caceres                  

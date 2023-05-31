@@ -1,6 +1,7 @@
 # Tu profe: Calificador de docentes
 
                             Por:
+                   Max Steven Hurtado Ramos
                    Sebastián Olaya Pérez
               Juan Alejandro Espinosa Caceres
                  Alejandro Aguirre Cardona

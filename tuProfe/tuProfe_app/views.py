@@ -3,9 +3,31 @@ from .models import Docente, Materia, Calificacion, Comentario, Usuario
 import math
 from django.db.models import Q
 from django.http import HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
 
 # Create your views here.
+def home(request):
+    return render(request, 'home.html')
+
+
+
+
+def login(request):
+    error_message = None
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            error_message = 'Correo electrónico o contraseña incorrectos'
+    context = {'error_message': error_message}
+    return render(request, 'login.html', context)
+
+
 def calificar(request):
 	docente = request.GET.get("docente")
 	materia = request.GET.get("materia")

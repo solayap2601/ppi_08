@@ -56,7 +56,7 @@ ROOT_URLCONF = 'tuProfe.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["D:/tuProfe/tuProfe/templates/"],
+        'DIRS': ["tuProfe/templates/"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

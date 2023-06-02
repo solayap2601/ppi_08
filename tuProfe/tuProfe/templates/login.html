@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,8 +29,8 @@
 <br>
 <div class="container">
   <div class="row">
-  	<div class="col-md-2"></div>
-    <div class="col-md-8 p-4" style="background-color: rgba(200,200,200,0.8); border-radius: 20px; border: 3px solid #000;">
+  	<div class="col-md-3"></div>
+    <div class="col-md-6 p-4" style="background-color: rgba(200,200,200,0.8); border-radius: 20px; border: 3px solid #000;">
       <h1>Iniciar Sesión</h1>
       <p>Inicia sesión para que puedas calificar a los profes con los que tengas clase.</p>
       {% if error_message %}
@@ -38,9 +39,9 @@
       <form>
         <div class="form-group">
           <label for="exampleInputEmail1">Correo Electrónico:</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo"
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo">
           <small id="emailHelp" class="form-text text-muted">Usa el correo universitario</small>
-          <br>  
+          <br> <br>
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Contraseña:</label>

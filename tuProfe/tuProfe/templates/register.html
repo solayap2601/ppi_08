@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,8 +29,8 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8 p-4" style="background-color: rgba(200,200,200,0.8); border-radius: 20px; border: 3px solid #000;">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 p-4" style="background-color: rgba(200,200,200,0.8); border-radius: 20px; border: 3px solid #000;">
       <h1>Registro</h1>
       <p>Regístrate para poder calificar a los profesores con los que tengas clase.</p>
       {% if messages %}
@@ -37,14 +38,12 @@
           <div class="alert alert-{{ message.tags }}">{{ message }}</div>
         {% endfor %}
       {% endif %}
-      <form method="POST" action="{% url 'register' %}">
+      <form method="POST" action="{% url 'registro' %}">
         {% csrf_token %}
         <div class="form-group">
           <label for="nombre">Nombre:</label>
           <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre">
-          <small id="emailHelp" class="form-text text-muted">La contraseña debe tener al menos 8 caracteres, al menos una letra mayúscula, al menos una letra minúscula, al menos un número y al menos un carácter especial</small>
           <br>
-          <br>  
         </div>
         <div class="form-group">
           <label for="correo">Correo Electrónico:</label>
@@ -56,7 +55,8 @@
         <div class="form-group">
           <label for="contrasena">Contraseña:</label>
           <input type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Contraseña">
-          <br>  
+          <small id="emailHelp" class="form-text text-muted">La contraseña debe tener al menos 8 caracteres, al menos una letra mayúscula, al menos una letra minúscula, al menos un número y al menos un carácter especial</small>
+          <br> <br>
         </div>
         <button type="submit" class="btn btn-primary">Registrarse</button>
       </form>

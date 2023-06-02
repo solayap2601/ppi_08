@@ -19,7 +19,7 @@ from tuProfe_app.views import home, calificar, buscar, docente, guardar, login, 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', home, name='home'),
+    path('', home, name='home'),
     path('registro/', login, name='registro'),
     path('login/', login, name='login'),
     path('calificar/', calificar),

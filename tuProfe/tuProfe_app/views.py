@@ -7,6 +7,8 @@ from django.contrib.auth.hashers import make_password
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+
 import re
 from django.contrib import messages
 
@@ -54,6 +56,7 @@ def login(request):
     return render(request, 'login.html', context)
 
 
+@login_required
 def calificar(request):
 	docente = request.GET.get("docente")
 	materia = request.GET.get("materia")
@@ -61,6 +64,8 @@ def calificar(request):
 	materia = Materia.objects.get(id=materia)
 	plantilla = render(request,"calificar.html",{"docente":docente, "materia":materia})
 	return plantilla
+	if not request.user.is_authenticated:
+		return redirect('login')
 
 def guardar(request):
 	docente = request.GET.get("docente")

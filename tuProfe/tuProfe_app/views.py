@@ -9,7 +9,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
 
+import json
 import re
 from django.contrib import messages
 
@@ -65,8 +67,8 @@ def login(request):
 
 
 def calificar(request):
-	docente = request.GET.get("docente")
-	materia = request.GET.get("materia")
+	docente = request.POST.get("docente")
+	materia = request.POST.get("materia")
 	docente = Docente.objects.get(id=docente)
 	materia = Materia.objects.get(id=materia)
 	plantilla = render(request,"calificar.html",{"docente":docente, "materia":materia})
@@ -74,14 +76,14 @@ def calificar(request):
 
 
 def guardar(request):
-	docente = request.GET.get("docente")
-	materia = request.GET.get("materia")
-	manejo = request.GET.get("manejo")
-	metodologia = request.GET.get("metodologia")
-	general = request.GET.get("general")
-	comentario = request.GET.get("comentario")
+	docente = request.POST.get("docente")
+	materia = request.POST.get("materia")
+	manejo = request.POST.get("manejo")
+	metodologia = request.POST.get("metodologia")
+	general = request.POST.get("general")
+	comentario = request.POST.get("comentario")
 
-	usuario = Usuario.objects.get(id=1)
+	usuario = User.objects.get(id=request.user.id)
 	docente = Docente.objects.get(id=docente)
 	materia = Materia.objects.get(id=materia)
 
@@ -91,6 +93,7 @@ def guardar(request):
 	comentario.save()
 	response = redirect('/buscar/')
 	return response
+
 
 def buscar(request):
 
@@ -125,6 +128,7 @@ def buscar(request):
 
 	plantilla = render(request,"buscar.html",{"docentes":docentes, "materias":materias, "busqueda":busqueda, "lista_calificaciones":lista_calificaciones, "id_materia":id_materia})
 	return plantilla
+
 
 def docente(request, id_docente,id_materia, pagina):
     calificaciones = Calificacion.objects.filter(docente_id = id_docente, materia_id = id_materia)

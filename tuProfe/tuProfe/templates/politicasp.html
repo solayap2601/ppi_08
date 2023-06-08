@@ -16,6 +16,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
       {% if user.is_authenticated %}
         <li class="nav-item">
           <span class="navbar-text">{{ user.first_name }}</span>

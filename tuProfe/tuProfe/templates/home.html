@@ -27,10 +27,16 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'buscar' %}">Búsqueda</a>
+      </li>
+    </ul>
+    <ul class="mx-auto"></ul>
     <ul class="navbar-nav ml-auto">
       {% if user.is_authenticated %}
         <li class="nav-item">
-          <span class="navbar-text">{{ user.first_name }}</span>
+          <span class="nav-link">{{ user.first_name }}</span>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'logout' %}" onclick="return confirm('¿Estás seguro de que quieres cerrar sesión?')">Cerrar Sesión</a>
@@ -43,9 +49,6 @@
           <a class="nav-link" href="{% url 'registro' %}">Registrarse</a>
         </li>
       {% endif %}
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'buscar' %}">Búsqueda</a>
-      </li>
     </ul>
   </div>
 </nav>
@@ -71,8 +74,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 text-center">
-        <p class="m-1">Autores: Max Steven Hurtado Ramos, Sebastián Olaya Pérez, Juan Alejandro Espinosa Caceres, Alejandro Aguirre Cardona</p>
-        <p class="m-1"><a href="{% url 'politicasp' %}">Política de privacidad</a></p>
+        <p class="m-1">Autores: Max Steven Hurtado Ramos, Sebastián Olaya Pérez, Juan Alejandro Espinosa Caceres, Alejandro Aguirre Cardona <a href="{% url 'politicasp' %}">Política de privacidad</a></p>
       </div>
     </div>
   </div>

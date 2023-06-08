@@ -11,6 +11,16 @@
   		color: #fff;
   		background: #444;
 		}
+    body {
+      margin-bottom: 100px;
+    }
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #000;
+      color: #fff;
+    }
 	</style>
 </head>
 <body background="{% static 'img/background.jpg' %}" style="background-size: cover;">
@@ -104,7 +114,19 @@
     <div class="col-md-2"></div>
   </div>
 </div>
+
 <br>
+
+<footer class="py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <p>Autores: Max Steven Hurtado Ramos, Sebastián Olaya Pérez, Juan Alejandro Espinosa Caceres, Alejandro Aguirre Cardona</p>
+        <p><a href="{% url 'politicasp' %}">Política de privacidad</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

@@ -151,3 +151,6 @@ def docente(request, id_docente,id_materia, pagina):
 
     plantilla = render(request,"docente.html",{"docente":Docente.objects.get(id=id_docente), "materia":Materia.objects.get(id=id_materia), "general":general, "metodologia":metodologia, "manejo_tema":manejo_tema, "comentarios":comentarios[indice:indice+3], "pagina":pagina, "max_pag":max_pag})
     return plantilla
+
+def politicasp(request):
+    return render(request, 'politicasp.html')

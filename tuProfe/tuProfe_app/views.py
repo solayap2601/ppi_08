@@ -14,7 +14,7 @@ from django.contrib import messages
 
 # Create your views here.
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'home.html', {'user':request.user.username})
 
 
 def register(request):

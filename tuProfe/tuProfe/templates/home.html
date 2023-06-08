@@ -28,12 +28,21 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'registro' %}">Registrarse</a>
-      </li>
+      {% if user.is_authenticated %}
+        <li class="nav-item">
+          <span class="navbar-text">{{ user.first_name }}</span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}" onclick="return confirm('¿Estás seguro de que quieres cerrar sesión?')">Cerrar Sesión</a>
+        </li>
+      {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'registro' %}">Registrarse</a>
+        </li>
+      {% endif %}
       <li class="nav-item">
         <a class="nav-link" href="{% url 'buscar' %}">Búsqueda</a>
       </li>
@@ -50,7 +59,6 @@
       
 		<h1>Bienvenido a TuProfe</h1>
 		<p>Esta aplicación te permite buscar y calificar a los docentes de tu universidad para ayudarte a tomar decisiones informadas sobre qué profesores tomar.</p>
-    <p>{{user}}</p>
 
     </div>
     <div class="col-md-2"></div>

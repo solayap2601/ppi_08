@@ -15,7 +15,7 @@ from django.contrib import messages
 
 # Create your views here.
 def home(request):
-    return render(request, 'home.html', {'user':request.user.username})
+    return render(request, 'home.html')
 
 
 from django.contrib.auth.models import User

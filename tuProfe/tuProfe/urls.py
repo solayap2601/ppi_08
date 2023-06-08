@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from tuProfe_app.views import home, calificar, buscar, docente, guardar, login, register, politicasp
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,5 +27,6 @@ urlpatterns = [
     path('calificar/', calificar),
     path('buscar/', buscar, name="buscar"),
     path('docente/<int:id_docente>/<int:id_materia>/<int:pagina>', docente),
-    path('guardar/', guardar)
+    path('guardar/', guardar),
+    path('logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout')
 ]

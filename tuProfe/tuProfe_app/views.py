@@ -6,8 +6,9 @@ from django.http import HttpResponse
 from django.contrib.auth.hashers import make_password
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 import re
 from django.contrib import messages
@@ -17,6 +18,8 @@ def home(request):
     return render(request, 'home.html')
 
 
+from django.contrib.auth.models import User
+
 def register(request):
     if request.method == 'POST':
         nombre = request.POST['nombre']
@@ -24,6 +27,8 @@ def register(request):
         contrasena = request.POST['contrasena']
         if not correo.endswith('@unal.edu.co'):
             messages.error(request, 'No estás usando un correo válido')
+        elif User.objects.filter(email=correo).exists():
+            messages.error(request, 'Ya existe un usuario registrado con ese correo electrónico')
         elif len(contrasena) < 8:
             messages.error(request, 'La contraseña debe tener al menos 8 caracteres')
         elif not re.search(r'[A-Z]', contrasena):
@@ -35,10 +40,12 @@ def register(request):
         elif not re.search(r'[!@#$%^&*()_+\-=\[\]{};\'\\:"|,.<>\/?]', contrasena):
             messages.error(request, 'La contraseña debe contener al menos un carácter especial')
         else:
-            usuario = Usuario(nombre=nombre, correo=correo, contrasena=contrasena)
-            usuario.save()
-            return redirect('home')
+            user = User.objects.create_user(username=correo, email=correo, password=contrasena)
+            user.first_name = nombre
+            user.save()
+            return redirect('login')
     return render(request, 'register.html')
+
 
 
 def login(request):
@@ -48,7 +55,7 @@ def login(request):
         password = request.POST['password']
         user = authenticate(request, username=email, password=password)
         if user is not None:
-            login(request, user)
+            auth_login(request, user)
             return redirect('home')
         else:
             error_message = 'Correo electrónico o contraseña incorrectos'
@@ -56,7 +63,7 @@ def login(request):
     return render(request, 'login.html', context)
 
 
-@login_required
+
 def calificar(request):
 	docente = request.GET.get("docente")
 	materia = request.GET.get("materia")
@@ -64,8 +71,7 @@ def calificar(request):
 	materia = Materia.objects.get(id=materia)
 	plantilla = render(request,"calificar.html",{"docente":docente, "materia":materia})
 	return plantilla
-	if not request.user.is_authenticated:
-		return redirect('login')
+
 
 def guardar(request):
 	docente = request.GET.get("docente")
@@ -121,36 +127,34 @@ def buscar(request):
 	return plantilla
 
 def docente(request, id_docente,id_materia, pagina):
-
     calificaciones = Calificacion.objects.filter(docente_id = id_docente, materia_id = id_materia)
     general = 0
     metodologia = 0
     manejo_tema = 0
 
     for i in calificaciones:
-    	general += i.general
-    	metodologia += i.metodologia
-    	manejo_tema += i.manejo_tema
-
+        general += i.general
+        metodologia += i.metodologia
+        manejo_tema += i.manejo_tema
 
     if(calificaciones.count()==0):
-    	general = "No hay datos"
-    	metodologia = "No hay datos"
-    	manejo_tema = "No hay datos"
-    else: 	
-    	general = general/calificaciones.count()
-    	metodologia = metodologia/calificaciones.count()
-    	manejo_tema = manejo_tema/calificaciones.count()
+        general = "No hay datos"
+        metodologia = "No hay datos"
+        manejo_tema = "No hay datos"
+    else:     
+        general = general/calificaciones.count()
+        metodologia = metodologia/calificaciones.count()
+        manejo_tema = manejo_tema/calificaciones.count()
 
     comentarios = Comentario.objects.filter(docente_id = id_docente, materia_id = id_materia)
     max_pag =math.ceil(comentarios.count()/3)
     if max_pag == 0:
-    	max_pag = 1
+        max_pag = 1
     indice = (pagina-1)*3
-
 
     plantilla = render(request,"docente.html",{"docente":Docente.objects.get(id=id_docente), "materia":Materia.objects.get(id=id_materia), "general":general, "metodologia":metodologia, "manejo_tema":manejo_tema, "comentarios":comentarios[indice:indice+3], "pagina":pagina, "max_pag":max_pag})
     return plantilla
+
 
 def politicasp(request):
     return render(request, 'politicasp.html')

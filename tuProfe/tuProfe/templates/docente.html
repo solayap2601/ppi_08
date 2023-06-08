@@ -32,15 +32,21 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ml-auto">
+      {% if user.is_authenticated %}
+      <li class="nav-item">
+        <span class="navbar-text">{{ user.first_name }}</span>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}" onclick="return confirm('¿Estás seguro de que quieres cerrar sesión?')">Cerrar Sesión</a>
+      </li>
+    {% else %}
       <li class="nav-item">
         <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{% url 'registro' %}">Registrarse</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'buscar' %}">Búsqueda</a>
-      </li>
+    {% endif %}
     </ul>
   </div>
 </nav>
@@ -55,9 +61,23 @@
 		<h3>Docente: {{docente.nombre}}</h3>
 		<h6>Correo: {{docente.correo}}</h6>
 		<h6>Oficina: {{docente.oficina}}</h6>
-		<div class="text-center"><a class="btn btn-dark px-5" href="/calificar/?docente={{docente.id}}&materia={{materia.id}}">Calificar este docente</a></div>
-		<br>
-		<table class="table">
+		<div class="text-center">
+      <button class="btn btn-dark px-5" onclick="calificarDocente()">Calificar este docente</button>
+    </div>
+    <script>
+      function calificarDocente() {
+        {% if user.is_authenticated %}
+          window.location.href = "/calificar/?docente={{docente.id}}&materia={{materia.id}}";
+        {% else %}
+          if (confirm("Debes iniciar sesión para calificar a un docente. ¿Deseas iniciar sesión ahora?")) {
+            window.location.href = "{% url 'login' %}";
+          }
+        {% endif %}
+      }
+    </script>
+    <br>
+    
+    <table class="table">
   				<tbody>
     				<tr>
       				<th scope="row">Metodologia de la Clase</th>

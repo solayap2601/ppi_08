@@ -45,7 +45,7 @@
       <p>Regístrate para poder calificar a los profesores con los que tengas clase.</p>
       {% if messages %}
         {% for message in messages %}
-          <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+          <div class="alert alert-danger">{{ message }}</div>
         {% endfor %}
       {% endif %}
       <form method="POST" action="{% url 'registro' %}">

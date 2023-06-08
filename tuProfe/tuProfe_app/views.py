@@ -143,7 +143,7 @@ def docente(request, id_docente,id_materia, pagina):
     	manejo_tema = manejo_tema/calificaciones.count()
 
     comentarios = Comentario.objects.filter(docente_id = id_docente, materia_id = id_materia)
-    max_pag =math.floor(comentarios.count()/3)
+    max_pag =math.ceil(comentarios.count()/3)
     if max_pag == 0:
     	max_pag = 1
     indice = (pagina-1)*3

@@ -24,9 +24,9 @@ urlpatterns = [
     path('politicasp/', politicasp, name='politicasp'),
     path('registro/', register, name='registro'),
     path('login/', login, name='login'),
-    path('calificar/', calificar),
+    path('calificar/', calificar, name= "calificar"),
     path('buscar/', buscar, name="buscar"),
     path('docente/<int:id_docente>/<int:id_materia>/<int:pagina>', docente),
-    path('guardar/', guardar),
+    path('guardar/', guardar, name="guardar"),
     path('logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout')
 ]

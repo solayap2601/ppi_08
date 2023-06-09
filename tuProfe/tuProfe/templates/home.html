@@ -14,10 +14,10 @@
       position: fixed;
       bottom: 0;
       width: 100%;
-      background-color: #000;
+      background-color: #343a40;
       color: #fff;
     }
-  </style>
+  </style>  
 </head>
 <body background="{% static 'img/background.jpg' %}" style="background-size: cover;">
 
@@ -27,10 +27,16 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'buscar' %}">Búsqueda</a>
+      </li>
+    </ul>
+    <ul class="mx-auto"></ul>
     <ul class="navbar-nav ml-auto">
       {% if user.is_authenticated %}
         <li class="nav-item">
-          <span class="navbar-text">{{ user.first_name }}</span>
+          <span class="nav-link">{{ user.first_name }}</span>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'logout' %}" onclick="return confirm('¿Estás seguro de que quieres cerrar sesión?')">Cerrar Sesión</a>
@@ -43,9 +49,6 @@
           <a class="nav-link" href="{% url 'registro' %}">Registrarse</a>
         </li>
       {% endif %}
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'buscar' %}">Búsqueda</a>
-      </li>
     </ul>
   </div>
 </nav>
@@ -58,7 +61,27 @@
     <div class="col-md-8 p-4" style="background-color: rgba(200,200,200,0.8); border-radius: 20px; border: 3px solid #000;">
       
 		<h1>Bienvenido a TuProfe</h1>
-		<p>Esta aplicación te permite buscar y calificar a los docentes de tu universidad para ayudarte a tomar decisiones informadas sobre qué profesores tomar.</p>
+		
+  <p>Esta aplicación te permite calificar y evaluar el desempeño de los docentes en nuestra universidad. Ayúdanos a mejorar la calidad educativa proporcionando tus comentarios y calificaciones sobre los docentes.</p>
+
+  <h2>Instrucciones</h2>
+  <ol>
+    <li>Inicia sesión con tu cuenta de usuario o crea una nueva cuenta si aún no estás registrado.</li>
+    <li>Busca al docente que deseas calificar utilizando la función de búsqueda.</li>
+    <li>Selecciona al docente y proporciona tu calificación y comentarios en base a tu experiencia con él.</li>
+    <li>Recuerda que todos los comentarios y calificaciones se mantienen de forma anónima para proteger tu privacidad.</li>
+  </ol>
+
+  <h2>Beneficios de la Aplicación</h2>
+  <ul>
+    <li>Contribuye a la mejora continua del desempeño docente.</li>
+    <li>Ayuda a futuros estudiantes a tomar decisiones informadas al elegir sus docentes.</li>
+    <li>Proporciona retroalimentación constructiva para los docentes y la universidad.</li>
+    <li>Fomenta la transparencia y la rendición de cuentas en el proceso educativo.</li>
+  </ul>
+
+  <p>¡Gracias por utilizar nuestra aplicación de calificación de docentes!</p>
+
 
     </div>
     <div class="col-md-2"></div>
@@ -71,8 +94,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 text-center">
-        <p>Autores: Max Steven Hurtado Ramos, Sebastián Olaya Pérez, Juan Alejandro Espinosa Caceres, Alejandro Aguirre Cardona</p>
-        <p><a href="{% url 'politicasp' %}">Política de privacidad</a></p>
+        <p class="m-1" >Autores: Max Steven Hurtado Ramos, Sebastián Olaya Pérez, Juan Alejandro Espinosa Caceres, Alejandro Aguirre Cardona <a href="{% url 'politicasp' %}">Política de privacidad</a></p>
       </div>
     </div>
   </div>

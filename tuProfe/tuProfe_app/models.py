@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Docente(models.Model):
@@ -26,7 +27,7 @@ class Usuario(models.Model):
 		return self.nombre
 
 class Comentario(models.Model):
-	usuario = models.ForeignKey(Usuario, on_delete = models.CASCADE)
+	usuario = models.ForeignKey(User, on_delete = models.CASCADE)
 	docente = models.ForeignKey(Docente, on_delete = models.CASCADE)
 	materia = models.ForeignKey(Materia, on_delete = models.CASCADE)
 	texto = models.CharField(max_length=500)
@@ -35,7 +36,7 @@ class Comentario(models.Model):
 		return self.docente.nombre + " - " + self. materia.nombre
 
 class Calificacion(models.Model):
-	usuario = models.ForeignKey(Usuario, on_delete = models.CASCADE)
+	usuario = models.ForeignKey(User, on_delete = models.CASCADE)
 	docente = models.ForeignKey(Docente, on_delete = models.CASCADE)
 	materia = models.ForeignKey(Materia, on_delete = models.CASCADE)
 	general = models.PositiveIntegerField()

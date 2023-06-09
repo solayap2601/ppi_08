@@ -14,7 +14,7 @@
       position: fixed;
       bottom: 0;
       width: 100%;
-      background-color: #000;
+      background-color: #343a40;
       color: #fff;
     }
   </style>
@@ -28,10 +28,11 @@
 	  <span class="navbar-toggler-icon"></span>
 	</button>
 	<div class="collapse navbar-collapse" id="navbarNav">
-	  <ul class="navbar-nav ml-auto">
+    <ul class="mx-auto"></ul>
+	  <ul class="navbar-nav mr-auto">
 		{% if user.is_authenticated %}
         <li class="nav-item">
-          <span class="navbar-text">{{ user.first_name }}</span>
+          <span class="nav-link">{{ user.first_name }}</span>
         </li>
 		<li class="nav-item">
 			<a class="nav-link" href="{% url 'logout' %}" onclick="return confirm('¿Estás seguro de que quieres cerrar sesión?')">Cerrar Sesión</a>
@@ -45,6 +46,7 @@
         </li>
       {% endif %}
 	  </ul>
+
     </div>
 </nav>
 <br>
@@ -140,8 +142,7 @@
 	<div class="container">
 	  <div class="row">
 		<div class="col-md-12 text-center">
-		  <p>Autores: Max Steven Hurtado Ramos, Sebastián Olaya Pérez, Juan Alejandro Espinosa Caceres, Alejandro Aguirre Cardona</p>
-		  <p><a href="{% url 'politicasp' %}">Política de privacidad</a></p>
+		  <p class="m-1">Autores: Max Steven Hurtado Ramos, Sebastián Olaya Pérez, Juan Alejandro Espinosa Caceres, Alejandro Aguirre Cardona <a href="{% url 'politicasp' %}">Política de privacidad</a></p>
 		</div>
 	  </div>
 	</div>

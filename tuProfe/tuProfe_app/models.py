@@ -1,6 +1,6 @@
- # Importa el modulo models de Django para definir modelos de base de datos
+# Importa el modulo models de Django para definir modelos de base de datos
 from django.db import models 
- # Importa el modelo User de Django para trabajar con usuarios del sistema
+# Importa el modelo User de Django para trabajar con usuarios del sistema
 from django.contrib.auth.models import User 
 
 

@@ -1,7 +1,7 @@
 # Importa la funcion render para renderizar las plantillas
 from django.shortcuts import render
 # Importa los modelos necesarios  de la pagina
-from .models import Docente, Materia, Calificacion, Comentario, Usuario  
+from .models import Docente, Materia, Calificacion, Comentario, Usuario, Autorizacion
 # Importa  para operaciones matematicas
 import math  
 # Importa Q para realizar consultas complejas en la base de datos
@@ -29,14 +29,15 @@ import json
 import re 
 # Importa messages para mostrar mensajes de error o éxito al usuario
 from django.contrib import messages 
+from django.contrib.auth.models import User
+    #funcion del registro del usuario
 
 # Create your views here.
 def home(request):
     # Renderiza la plantilla 'home.html' y la devuelve como respuesta
     return render(request, 'home.html') 
 
-from django.contrib.auth.models import User
-    #funcion del registro del usuario
+
 def register(request):
     if request.method == 'POST':
         nombre = request.POST['nombre']
@@ -112,6 +113,10 @@ def guardar(request):
     docente = Docente.objects.get(id=docente)
     materia = Materia.objects.get(id=materia)
 
+    aut = Autorizacion.objects.filter(email_estudiante = request.user.email, materia = materia, docente = docente)
+    aut.delete()
+
+
     calificacion = Calificacion(usuario=usuario, docente=docente, materia=materia, general=general, metodologia=metodologia, manejo_tema=manejo)
     comentario = Comentario(usuario=usuario, docente=docente, materia=materia, texto=comentario)
     calificacion.save()
@@ -184,7 +189,15 @@ def docente(request, id_docente, id_materia, pagina):
         max_pag = 1
     indice = (pagina - 1) * 3
 
-    plantilla = render(request, "docente.html", {"docente": Docente.objects.get(id=id_docente), "materia": Materia.objects.get(id=id_materia), "general": general, "metodologia": metodologia, "manejo_tema": manejo_tema, "comentarios": comentarios[indice:indice + 3], "pagina": pagina, "max_pag": max_pag})
+    if(request.user.is_authenticated):
+        if(Autorizacion.objects.filter(email_estudiante = request.user.email, materia = Materia.objects.get(id=id_materia), docente = Docente.objects.get(id=id_docente)).exists()):
+            authorized = 1
+        else:
+            authorized = 0
+    else:
+        authorized = 0
+
+    plantilla = render(request, "docente.html", {"docente": Docente.objects.get(id=id_docente), "materia": Materia.objects.get(id=id_materia), "general": general, "metodologia": metodologia, "manejo_tema": manejo_tema, "comentarios": comentarios[indice:indice + 3], "pagina": pagina, "max_pag": max_pag, "authorized":authorized})
     # Renderiza la plantilla 'docente.html' con los datos y la devuelve como respuesta
     return plantilla  
 

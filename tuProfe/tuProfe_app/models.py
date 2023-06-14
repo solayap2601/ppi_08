@@ -75,3 +75,10 @@ class Calificacion(models.Model):
     def __str__(self):
         # Devuelve una representacion legible del objeto Calificacion
         return self.docente.nombre + " - " + self.materia.nombre
+
+class Autorizacion(models.Model):
+    email_estudiante = models.EmailField(max_length=50)
+    materia = materia = models.ForeignKey(Materia, on_delete=models.CASCADE)
+    docente = models.ForeignKey(Docente, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.email_estudiante + " - " + self.docente.nombre + " - " + self.materia.nombre

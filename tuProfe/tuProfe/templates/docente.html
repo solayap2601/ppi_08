@@ -203,7 +203,12 @@
                     document.getElementById("btn_calificar").onclick = function() {
 
 {% if user.is_authenticated %}
-    enviarDatos();
+    if({{authorized}}==1){
+        enviarDatos();
+    }else{
+        alert("Usted no esta autorizado para calificar el desempeño de este docente en esta materia o ya ha enviado su calificacion.")
+    }
+    
 {% else %}
     if (confirm("Debes iniciar sesión para calificar a un docente. ¿Deseas iniciar sesión ahora?")) {
       window.location.href = "{% url 'login' %}";

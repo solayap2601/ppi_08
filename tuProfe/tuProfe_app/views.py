@@ -88,7 +88,8 @@ def login(request):
     context = {'error_message': error_message}
     # Renderiza la plantilla 'login.html' con el contexto y la devuelve como respuesta
     return render(request, 'login.html', context)  
-    #funcion para calificar
+
+# Funcion para calificar
 def calificar(request):
     docente = request.POST.get("docente")
     materia = request.POST.get("materia")
@@ -99,8 +100,15 @@ def calificar(request):
     plantilla = render(request, "calificar.html", {"docente": docente, "materia": materia})
     # Renderiza la plantilla 'calificar.html' con los datos y la devuelve como respuesta
     return plantilla 
-    
-    #funcion guardar
+
+palabras_prohibidas = ['sapo', 'perro', 'mrk', 'maricon', 'marica', 'perro', 'perra', 'hpta', 'cerdo', 'asqueroso',
+                        'tonto', 'imbécil', 'idiota', 'bobalicón', 'bodoque', 'mamerto', 'bobo', ' zonzo', 'estúpido',
+                        'cretino', 'simplón', 'necio', 'tarugo', 'torpe', 'tarado', 'zoquete', 'huevón', 'guevon',
+                        'gueva', 'gva', 'gvon', 'chimbo', 'chimba', 'gonorrea', 'pato', 'grandísimohijodelagranputa', 
+                        'puta', 'hijodeputa', 'hijoputa', 'joputa', "líchigo", 'zunga', 'huevon', 'lampara', 'boleta,'
+                        'gordo', 'gorda', 'guiso', 'cachón']
+
+# Funcion guardar
 def guardar(request):
     docente = request.POST.get("docente")
     materia = request.POST.get("materia")
@@ -109,13 +117,16 @@ def guardar(request):
     general = request.POST.get("general")
     comentario = request.POST.get("comentario")
 
+    if any(palabra in comentario for palabra in palabras_prohibidas):
+        messages.error(request, 'Tu comentario contiene palabras prohibidas. Por favor, modifícalo antes de enviarlo.')
+        return redirect('/calificar/')
+
     usuario = User.objects.get(id=request.user.id)
     docente = Docente.objects.get(id=docente)
     materia = Materia.objects.get(id=materia)
 
-    aut = Autorizacion.objects.filter(email_estudiante = request.user.email, materia = materia, docente = docente)
+    aut = Autorizacion.objects.filter(email_estudiante=request.user.email, materia=materia, docente=docente)
     aut.delete()
-
 
     calificacion = Calificacion(usuario=usuario, docente=docente, materia=materia, general=general, metodologia=metodologia, manejo_tema=manejo)
     comentario = Comentario(usuario=usuario, docente=docente, materia=materia, texto=comentario)
@@ -124,9 +135,10 @@ def guardar(request):
 
     response = redirect('/buscar/')
     # Redirige al usuario a la pagina de busqueda
-    return response  
+    return response
+  
     
-    #funcion de busqueda
+# Funcion de busqueda
 def buscar(request):
     busqueda = request.GET.get("busqueda")
     id_materia = request.GET.get("materia")
@@ -162,7 +174,7 @@ def buscar(request):
     plantilla = render(request, "buscar.html", {"docentes": docentes, "materias": materias, "busqueda": busqueda, "lista_calificaciones": lista_calificaciones, "id_materia": id_materia})
     return plantilla  # Renderiza la plantilla 'buscar.html' con los datos y la devuelve como respuesta
     
-    #funcion en la cual estan los docente
+# Funcion en la cual estan los docente
 def docente(request, id_docente, id_materia, pagina):
     calificaciones = Calificacion.objects.filter(docente_id=id_docente, materia_id=id_materia)
     general = 0

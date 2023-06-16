@@ -15,14 +15,14 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
+  <div class="collapse navbar-collapse" id="navbarNav" style="display: flex; justify-content: space-between;">
     <ul class="navbar-nav ml-auto">
       {% if user.is_authenticated %}
         <li class="nav-item">
-          <span class="navbar-text">{{ user.first_name }}</span>
+          <span class="navbar-text" style="display: inline-block; vertical-align: middle;">{{ user.first_name }}</span>
         </li>
         <li class="nav-item">
-			<a class="nav-link" href="{% url 'logout' %}" onclick="return confirm('¿Estás seguro de que quieres cerrar sesión?')">Cerrar Sesión</a>
+			<a class="nav-link" href="{% url 'logout' %} style="margin-left: auto;" onclick="return confirm('¿Estás seguro de que quieres cerrar sesión?')">Cerrar Sesión</a>
 		</li>
       {% else %}
         <li class="nav-item">

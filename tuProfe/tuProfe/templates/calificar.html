@@ -63,7 +63,26 @@
             </div>
         </nav>
         <br>
-            <div class="container">
+            
+        <script>
+            function validarFormulario() {
+              var comentario = document.querySelector('textarea[name="comentario"]').value;
+              var palabrasProhibidas = ['sapo', 'perro', 'mrk', 'maricon', 'marica', 'perro', 'perra', 'hpta', 'cerdo',
+                       'asqueroso', 'tonto', 'imbécil', 'idiota', 'bobalicón', 'bodoque', 'mamerto',
+                        'bobo', ' zonzo', 'estúpido','cretino', 'simplón', 'necio', 'tarugo', 'torpe',
+                        'tarado', 'zoquete', 'huevón', 'guevon', 'gueva', 'gva', 'gvon', 'chimbo', 'chimba',
+                        'gonorrea', 'pato', 'grandísimohijodelagranputa', 'puta', 'hijodeputa', 'hijoputa',
+                        'joputa', "líchigo", 'zunga', 'huevon', 'lampara', 'boleta', 'gordo', 'gorda',
+                        'guiso', 'cachón'];
+              if (palabrasProhibidas.some(palabra => comentario.includes(palabra))) {
+                alert('Tu comentario contiene palabras prohibidas. Por favor, modifícalo antes de enviarlo.');
+                return false;
+              }
+              return true;
+            }
+          </script>
+          
+        <div class="container">
                 <div class="row">
                     <div class="col-md-3">
                     </div>
@@ -202,7 +221,7 @@
                                         <textarea class="form-control" name="comentario" value="" placeholder="Escriba aqui su comentario" rows="5"></textarea>
                                         <br>
                                             <div class="text-center">
-                                                <button class="btn btn-dark px-5" type="submit">
+                                                <button class="btn btn-dark px-5" type="submit" onclick="return validarFormulario()">
                                                     Enviar
                                                 </button>
                                             </div>

@@ -21,7 +21,6 @@ from django.contrib.auth.decorators import login_required
 # Importa el modelo User de autenticacion de Django
 from django.contrib.auth.models import User  
 # Importa csrf_exempt para desactivar proteccion CSRF en vistas especificas
-
 from django.views.decorators.csrf import csrf_exempt  
 # Importa el modulo json para trabajar con datos JSON
 import json
@@ -30,21 +29,22 @@ import re
 # Importa messages para mostrar mensajes de error o éxito al usuario
 from django.contrib import messages 
 from django.contrib.auth.models import User
-    #funcion del registro del usuario
+# Para dovolverse en el navegador
+from django.urls import reverse
 
 # Create your views here.
 def home(request):
     # Renderiza la plantilla 'home.html' y la devuelve como respuesta
     return render(request, 'home.html') 
 
-
+# Funcion del registro del usuario.
 def register(request):
     if request.method == 'POST':
         nombre = request.POST['nombre']
         correo = request.POST['correo']
         contrasena = request.POST['contrasena']
         
-        # Valida y registra un nuevo usuario
+        # Valida y registra un nuevo usuario.
         if not correo.endswith('@unal.edu.co'):
             messages.error(request, 'No estás usando un correo válido')
         elif User.objects.filter(email=correo).exists():
@@ -92,6 +92,7 @@ def login(request):
 # Funcion para calificar
 def calificar(request):
     docente = request.POST.get("docente")
+    print(f"Valor de docente: {docente}")
     materia = request.POST.get("materia")
     
     docente = Docente.objects.get(id=docente)
@@ -101,14 +102,18 @@ def calificar(request):
     # Renderiza la plantilla 'calificar.html' con los datos y la devuelve como respuesta
     return plantilla 
 
-palabras_prohibidas = ['sapo', 'perro', 'mrk', 'maricon', 'marica', 'perro', 'perra', 'hpta', 'cerdo', 'asqueroso',
-                        'tonto', 'imbécil', 'idiota', 'bobalicón', 'bodoque', 'mamerto', 'bobo', ' zonzo', 'estúpido',
-                        'cretino', 'simplón', 'necio', 'tarugo', 'torpe', 'tarado', 'zoquete', 'huevón', 'guevon',
-                        'gueva', 'gva', 'gvon', 'chimbo', 'chimba', 'gonorrea', 'pato', 'grandísimohijodelagranputa', 
-                        'puta', 'hijodeputa', 'hijoputa', 'joputa', "líchigo", 'zunga', 'huevon', 'lampara', 'boleta,'
-                        'gordo', 'gorda', 'guiso', 'cachón']
 
-# Funcion guardar
+# Lista para identificar comentarios negativos.
+palabras_prohibidas = ['sapo', 'perro', 'mrk', 'maricon', 'marica', 'perro', 'perra', 'hpta', 'cerdo',
+                       'asqueroso', 'tonto', 'imbécil', 'idiota', 'bobalicón', 'bodoque', 'mamerto',
+                        'bobo', ' zonzo', 'estúpido','cretino', 'simplón', 'necio', 'tarugo', 'torpe',
+                        'tarado', 'zoquete', 'huevón', 'guevon', 'gueva', 'gva', 'gvon', 'chimbo', 'chimba',
+                        'gonorrea', 'pato', 'grandísimohijodelagranputa', 'puta', 'hijodeputa', 'hijoputa',
+                        'joputa', "líchigo", 'zunga', 'huevon', 'lampara', 'boleta', 'gordo', 'gorda',
+                        'guiso', 'cachón']
+
+
+# Función para guardar.
 def guardar(request):
     docente = request.POST.get("docente")
     materia = request.POST.get("materia")
@@ -116,17 +121,13 @@ def guardar(request):
     metodologia = request.POST.get("metodologia")
     general = request.POST.get("general")
     comentario = request.POST.get("comentario")
-
-    if any(palabra in comentario for palabra in palabras_prohibidas):
-        messages.error(request, 'Tu comentario contiene palabras prohibidas. Por favor, modifícalo antes de enviarlo.')
-        return redirect('/calificar/')
-
     usuario = User.objects.get(id=request.user.id)
     docente = Docente.objects.get(id=docente)
     materia = Materia.objects.get(id=materia)
 
-    aut = Autorizacion.objects.filter(email_estudiante=request.user.email, materia=materia, docente=docente)
+    aut = Autorizacion.objects.filter(email_estudiante = request.user.email, materia = materia, docente = docente)
     aut.delete()
+
 
     calificacion = Calificacion(usuario=usuario, docente=docente, materia=materia, general=general, metodologia=metodologia, manejo_tema=manejo)
     comentario = Comentario(usuario=usuario, docente=docente, materia=materia, texto=comentario)
@@ -171,7 +172,10 @@ def buscar(request):
         docentes = 0
         lista_calificaciones = []
 
-    plantilla = render(request, "buscar.html", {"docentes": docentes, "materias": materias, "busqueda": busqueda, "lista_calificaciones": lista_calificaciones, "id_materia": id_materia})
+    plantilla = render(request, "buscar.html", {"docentes": docentes, "materias": materias,
+                                                 "busqueda": busqueda, "lista_calificaciones": lista_calificaciones, 
+                                                 "id_materia": id_materia})
+    
     return plantilla  # Renderiza la plantilla 'buscar.html' con los datos y la devuelve como respuesta
     
 # Funcion en la cual estan los docente
@@ -209,7 +213,11 @@ def docente(request, id_docente, id_materia, pagina):
     else:
         authorized = 0
 
-    plantilla = render(request, "docente.html", {"docente": Docente.objects.get(id=id_docente), "materia": Materia.objects.get(id=id_materia), "general": general, "metodologia": metodologia, "manejo_tema": manejo_tema, "comentarios": comentarios[indice:indice + 3], "pagina": pagina, "max_pag": max_pag, "authorized":authorized})
+    plantilla = render(request, "docente.html", {"docente": Docente.objects.get(id=id_docente),
+                                                "materia": Materia.objects.get(id=id_materia),
+                                                "general": general, "metodologia": metodologia,
+                                                "manejo_tema": manejo_tema, "comentarios": comentarios[indice:indice + 3],
+                                                "pagina": pagina, "max_pag": max_pag, "authorized":authorized})
     # Renderiza la plantilla 'docente.html' con los datos y la devuelve como respuesta
     return plantilla  
 
